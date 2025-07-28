@@ -1,0 +1,17 @@
+[
+  {
+    "memo" : "My first memo",
+    "tags" : "First pilot memo test"
+  },
+
+  {
+    "memo" : "My second memo",
+    "tags" : "second memo test"
+  },
+
+
+  {
+    "memo" : "My third memo",
+    "tags" : "third memo test"
+  }
+]
