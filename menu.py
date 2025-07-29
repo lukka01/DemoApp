@@ -1,3 +1,5 @@
+from random import choice
+
 from diarybook import DiaryBook
 import utils
 import sys
@@ -7,12 +9,15 @@ class Menu:
     def __init__(self):
         self.diarybook = DiaryBook()
         self.choices = {
-            "1.": self.show_all_diaries,
-            "2.": self.add_diary,
-            "3.": self.search_diaries,
-            "4.": self.populate_database,
-            "5.": self.quit
+            "1": self.show_all_diaries,
+            "2": self.add_diary,
+            "3": self.search_diaries,
+            "4": self.populate_database,
+            "5": self.quit,
+            "6": self.sort
         }
+
+
 
     def show_all_diaries(self):
         if len(self.diarybook.diaries) == 0:
@@ -21,20 +26,6 @@ class Menu:
             for diary in self.diarybook.diaries:
                 print(f"{diary.id} - {diary.memo} (Tags: {diary.tags})")
 
-    def create_account(self):
-        name = input("Enter your name: ")
-        if name in self.users:
-            print("An account with this name already exists.")
-            return
-        password = input("Enter your password: ")
-        self.users[name] = password
-        print(f"Account created for user '{name}'.")
-
-    def sort_by_id(self):
-        self.diaries.sort(key=lambda d: d.id)
-
-    def sort_by_memo(self):
-        self.diaries.sort(key=lambda d: d.memo.lower())
 
     def add_diary(self):
         memo = input("Enter a memo: ")
@@ -60,6 +51,28 @@ class Menu:
     def quit(self):
         print("Thanks for using DiaryBook! Goodbye.")
         sys.exit(0)
+
+    def sort(self,diarybook):
+        choice = input("Sort by id or by memo?").lower()
+        if choice == 'id':
+            diarybook.sort_by_id()
+        elif choice == 'memo':
+            diarybook.sort_by_memo()
+        else:
+            print("Invalid value")
+
+    def sort_by_memo(self, reverse = False):
+        def get_memo(diary):
+            return diary.memo.lower()
+        self.diarybook.diaries.sort(key = get_memo,reverse = reverse)
+
+    def sort_by_id(self, reverse = False):
+        def get_id(diary):
+            return diary.id
+        self.diarybook.diaries.sorted(key = get_id, reverse = reverse)
+
+
+
 
     def display_menu(self):
         print("""
