@@ -1,6 +1,7 @@
 from random import choice
 
 from diarybook import DiaryBook
+import Accounts
 import utils
 import sys
 
@@ -76,16 +77,26 @@ class Menu:
 
     def display_menu(self):
         print("""
-DiaryBook Menu:
-  1. Show all diaries
-  2. Add diary
-  3. Search with keyword
-  4. Populate diarybook from file
-  5. Quit
+            DiaryBook Menu:
+              1. Show all diaries
+              2. Add diary
+              3. Search with keyword
+              4. Populate diarybook from file
+              5. Quit
         """)
+
+
+
+
+
+
 
     def run(self):
         while True:
+            if not Accounts.sign_in():  # If login failed
+                print("Exiting program...")
+                sys.exit()
+
             self.display_menu()
             choice = input("Enter an option: ")
             action = self.choices.get(choice)
