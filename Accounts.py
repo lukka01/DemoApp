@@ -19,7 +19,7 @@ def create_account():
         return
 
     with open("accounts.txt", "a") as file:
-        file.write(f"{name},{password}\n")
+        file.write(f"{name},{password}")
 
     print("Account created successfully")
 

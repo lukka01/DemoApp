@@ -96,6 +96,9 @@ class Menu:
             if not Accounts.sign_in():  # If login failed
                 print("Exiting program...")
                 sys.exit()
+            with open("accounts.txt", "a") as file:
+                for diary in self.diarybook.diaries:
+                    file.write(f"{diary.id},{diary.memo},{diary.tags}\n")
 
             self.display_menu()
             choice = input("Enter an option: ")
